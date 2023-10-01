@@ -22,7 +22,6 @@ export class CreateCardDto {
     description: 'Descrição do card',
     example: 'Fazer compras no supermercado.',
   })
-  @IsNotEmpty()
   @IsString()
   note: string;
 
@@ -49,5 +48,5 @@ export class CreateCardDto {
     example: '2023-09-23T22:10:00Z',
   })
   @IsDateString()
-  createdAt: Date;
+  readonly createdAt: Date;
 }
