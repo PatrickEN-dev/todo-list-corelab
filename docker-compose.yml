@@ -33,7 +33,7 @@ services:
   front:
     container_name: todo-corelab__front
     build:
-      context: ./front-end/
+      context: ./front/
     ports:
       - "3000:3000" 
     depends_on:
