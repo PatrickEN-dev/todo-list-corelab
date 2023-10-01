@@ -8,18 +8,10 @@ datasource db {
 }
 
 model Card {
-  id         String     @id
-  title      String
+  id         String   @id
+  title      String   @unique
   note       String
-  isFavorite Boolean    @default(false)
+  isFavorite Boolean  @default(false)
   color      String?
-  favorite   Favorite[]
-  createdAt  DateTime   @default(now())
-}
-
-model Favorite {
-  id     String  @id
-  active Boolean @default(false)
-  card   Card    @relation(fields: [cardId], references: [id], onDelete: Cascade)
-  cardId String
+  createdAt  DateTime @default(now())
 }
