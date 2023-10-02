@@ -1,47 +1,52 @@
-import CardTitle from "../Title";
+import Card from "../Card";
+import { useCard } from "@/hooks/useCard.hook";
+import { TCard } from "@/context/Card/interfaces";
 
 export default function CardList() {
+  const { cards } = useCard();
+  const hasCards = cards && cards.length > 0;
+
   return (
     <>
-      <section>
-        <h4>Favoritos</h4>
-        <ul>
-          <li className="">
-            <CardTitle />
-          </li>
-          <li>
-            <CardTitle />
-          </li>
-        </ul>
-      </section>
+      {hasCards && (
+        <section>
+          <h4>Favoritos</h4>
+          <ul>
+            {cards.map((card: TCard) => (
+              <li key={card.id}>
+                <Card
+                  title={card.title}
+                  note={card.note}
+                  id={card.id}
+                  isFavorite={true}
+                  colors={card.colors}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-      <section>
-        <h4>Outros</h4>
-        <ul>
-          <li className="space-y-6">
-            <CardTitle />
-          </li>
-          <li>
-            <CardTitle />
-          </li>
+      {hasCards && (
+        <section>
+          <h4>Outros</h4>
+          <ul>
+            {cards.map((card: TCard) => (
+              <li key={card.id}>
+                <Card
+                  title={card.title}
+                  note={card.note}
+                  id={card.id}
+                  isFavorite={false}
+                  colors={card.colors}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
-          <li>
-            <CardTitle />
-          </li>
-
-          <li>
-            <CardTitle />
-          </li>
-
-          <li>
-            <CardTitle />
-          </li>
-
-          <li>
-            <CardTitle />
-          </li>
-        </ul>
-      </section>
+      {!hasCards && <p>Você ainda não criou anotações.</p>}
     </>
   );
 }
