@@ -8,8 +8,8 @@ export abstract class CardRepository {
   abstract findOne(id: string): Promise<Card | undefined> | Card | undefined;
   abstract update(id: string, data: UpdateCardDto): Promise<Card> | Card;
   abstract delete(id: string): Promise<void> | void;
+  abstract searchCards(query: string): Promise<Card[]>;
   abstract findByFavorite(isFavorite: boolean): Promise<Card[]>;
   abstract findByColor(color: string): Promise<Card[]>;
   abstract findByTitle(title: string): Promise<Card[]>;
-  abstract findByDescription(note: string): Promise<Card[]>;
 }

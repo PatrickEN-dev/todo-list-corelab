@@ -30,6 +30,20 @@ export class CardPrismaRepository implements CardRepository {
     return plainToInstance(Card, card);
   }
 
+  async searchCards(query: string): Promise<Card[]> {
+    const cards = await this.prisma.card.findMany({
+      where: {
+        OR: [
+          { title: { contains: query } },
+          { note: { contains: query } },
+          { color: { contains: query } },
+        ],
+      },
+    });
+
+    return cards;
+  }
+
   async findByFavorite(isFavorite: boolean): Promise<Card[]> {
     const cardFavorited = this.prisma.card.findMany({
       where: { isFavorite },
