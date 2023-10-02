@@ -4,7 +4,5 @@ import { CardsModule } from './modules/cards/cards.module';
 
 @Module({
   imports: [FavoriteModule, CardsModule],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

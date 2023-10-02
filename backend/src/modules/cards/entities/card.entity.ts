@@ -1,8 +1,8 @@
 export class Card {
-  readonly id: number;
+  readonly id: string;
   title: string;
   note: string;
-  isFavorite: Boolean;
+  isFavorite: boolean;
   color: string;
 
   readonly createdAt: Date;
