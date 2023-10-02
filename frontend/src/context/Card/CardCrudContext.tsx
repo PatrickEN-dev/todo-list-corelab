@@ -7,7 +7,7 @@ import { API } from "@/services/API";
 
 export const CardCrudContext = createContext<TCardCrudContext>({} as TCardCrudContext);
 
-export const UsercontactsProvider = ({ children }: TChildrenProps) => {
+export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const [cards, setCards] = useState<TCard[]>([]);
   const [cardData, setCardData] = useState([]);
   const [note, setNote] = useState("");
