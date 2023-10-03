@@ -2,7 +2,6 @@ import {
   Injectable,
   NotFoundException,
   ConflictException,
-  BadRequestException,
 } from '@nestjs/common';
 import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
@@ -13,16 +12,19 @@ export class CardsService {
   constructor(private cardRepository: CardRepository) {}
 
   async create(createCardDto: CreateCardDto) {
-    const existingCard = await this.cardRepository.findByTitle(
-      createCardDto.title,
-    );
+    // const existingCard = await this.cardRepository.findByTitle(
+    //   createCardDto.title,
+    // );
 
-    if (existingCard) {
-      throw new ConflictException('Card with this title already exists');
-    }
+    // console.log('antes do if', existingCard);
 
-    const newCard = await this.cardRepository.create(createCardDto);
-    return newCard;
+    // if (existingCard !== null) {
+    //   console.log(existingCard !== null);
+    //   throw new ConflictException('Card with this title already exists');
+    // }
+
+    const card = await this.cardRepository.create(createCardDto);
+    return card;
   }
 
   async findAll() {
@@ -77,10 +79,6 @@ export class CardsService {
   }
 
   async findByFavorite(isFavorite: boolean) {
-    if (isFavorite === undefined || isFavorite === null) {
-      throw new BadRequestException('isFavorite must be a boolean value');
-    }
-
     return await this.cardRepository.findByFavorite(isFavorite);
   }
 }

@@ -11,5 +11,5 @@ export abstract class CardRepository {
   abstract searchCards(query: string): Promise<Card[]>;
   abstract findByFavorite(isFavorite: boolean): Promise<Card[]>;
   abstract findByColor(color: string): Promise<Card[]>;
-  abstract findByTitle(title: string): Promise<Card[]>;
+  abstract findByTitle(title: string): Promise<Card | null>;
 }

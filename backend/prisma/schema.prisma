@@ -9,9 +9,9 @@ datasource db {
 
 model Card {
   id         String   @id
-  title      String   @unique
+  title      String
   note       String
-  isFavorite Boolean  @default(false)
+  isFavorite Boolean? @default(false)
   color      String?
   createdAt  DateTime @default(now())
 }

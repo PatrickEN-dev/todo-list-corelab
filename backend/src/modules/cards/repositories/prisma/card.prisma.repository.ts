@@ -14,6 +14,7 @@ export class CardPrismaRepository implements CardRepository {
   async create(data: CreateCardDto): Promise<Card> {
     const card = new Card();
     Object.assign(card, { ...data });
+
     const newCard = await this.prisma.card.create({ data: { ...card } });
 
     return plainToInstance(Card, newCard);
@@ -56,9 +57,14 @@ export class CardPrismaRepository implements CardRepository {
     return cardColor;
   }
 
-  async findByTitle(title: string): Promise<Card[]> {
-    const cardTitle = this.prisma.card.findMany({ where: { title } });
-    return cardTitle;
+  async findByTitle(title: string): Promise<Card | null> {
+    const card = await this.prisma.card.findFirst({
+      where: {
+        title: { equals: title },
+      },
+    });
+
+    return card || null;
   }
 
   async findByDescription(note: string): Promise<Card[]> {
