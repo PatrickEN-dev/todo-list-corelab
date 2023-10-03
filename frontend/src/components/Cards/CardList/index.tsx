@@ -6,13 +6,16 @@ export default function CardList() {
   const { cards } = useCard();
   const hasCards = cards && cards.length > 0;
 
+  const favoriteCards = cards.filter((card) => card.isFavorite);
+  const otherCards = cards.filter((card) => !card.isFavorite);
+
   return (
     <>
       {hasCards && (
-        <section>
+        <section className="h-[50vh]">
           <h4>Favoritos</h4>
           <ul>
-            {cards.map((card: TCard) => (
+            {favoriteCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card
                   title={card.title}
@@ -28,10 +31,10 @@ export default function CardList() {
       )}
 
       {hasCards && (
-        <section>
+        <section className="h-[50vh]">
           <h4>Outros</h4>
           <ul>
-            {cards.map((card: TCard) => (
+            {otherCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card
                   title={card.title}

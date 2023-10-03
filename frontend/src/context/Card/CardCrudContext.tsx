@@ -17,7 +17,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const getCardsRequest = async () => {
     try {
       const response = await API.get("/cards");
-      return response;
+      setCards(response.data);
     } catch (error) {
       console.error("Erro ao buscar os cards:", error);
     }
@@ -53,7 +53,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
 
   const deleteCard = async (id: string) => {
     try {
-      await API.delete(`/contacts/${id}`);
+      await API.delete(`/cards/${id}`);
 
       const deletedContact = cards.filter((card) => card.id !== id);
       setCards(deletedContact);
