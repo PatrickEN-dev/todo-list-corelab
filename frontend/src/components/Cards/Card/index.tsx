@@ -2,33 +2,46 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import EditTextIcon from "@/assets/edit-text.svg";
-import EditColorIcon from "@/assets/change-color-icon.svg";
 import FavoriteIcon from "@/assets/star-empty.svg";
+import StarActivated from "@/assets/star-color.svg";
 import { TCard } from "@/context/Card/interfaces";
 import { useCard } from "@/hooks/useCard.hook";
 import SelectColors from "@/components/SelectColors";
+import EditTextIcon from "@/assets/edit-text.svg";
+import EditColorIcon from "@/assets/change-color-icon.svg";
 
 interface CardProps extends TCard {}
 
-export default function Card({ id, title: initialTitle, note: initialNote }: CardProps) {
+export default function Card({
+  id,
+  title: initialTitle,
+  note: initialNote,
+  isFavorite: initialIsFavorite,
+}: CardProps) {
   const { updateCard, deleteCard } = useCard();
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [isEditingNote, setIsEditingNote] = useState(false);
   const [title, setTitle] = useState(initialTitle);
   const [note, setNote] = useState(initialNote);
+  const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
 
   const handleTitleChange = (newTitle: string) => setTitle(newTitle);
 
   const handleNoteChange = (newNote: string) => setNote(newNote);
 
+  const toggleFavorite = () => {
+    const updatedIsFavorite = !isFavorite;
+    setIsFavorite(updatedIsFavorite);
+    updateCard(id, { title, note, isFavorite: updatedIsFavorite });
+  };
+
   const saveTitle = () => {
-    updateCard(id, { title, note });
+    updateCard(id, { title, note, isFavorite });
     setIsEditingTitle(false);
   };
 
   const saveNote = () => {
-    updateCard(id, { title, note });
+    updateCard(id, { title, note, isFavorite });
     setIsEditingNote(false);
   };
 
@@ -48,7 +61,11 @@ export default function Card({ id, title: initialTitle, note: initialNote }: Car
           </h4>
         )}
         <div className="flex w-[50%] bg-blue">
-          <Image src={FavoriteIcon} alt="favoritar" />
+          <Image
+            src={isFavorite ? StarActivated : FavoriteIcon}
+            alt="favoritar"
+            onClick={toggleFavorite}
+          />
           <button type="button" onClick={() => deleteCard(id)}>
             X
           </button>
