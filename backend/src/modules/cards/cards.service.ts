@@ -12,12 +12,16 @@ export class CardsService {
   constructor(private cardRepository: CardRepository) {}
 
   async create(createCardDto: CreateCardDto) {
-    const existingCard = await this.cardRepository.findByTitle(
-      createCardDto.title,
-    );
-    if (existingCard) {
-      throw new ConflictException('Card with this title already exists');
-    }
+    // const existingCard = await this.cardRepository.findByTitle(
+    //   createCardDto.title,
+    // );
+
+    // console.log('antes do if', existingCard);
+
+    // if (existingCard !== null) {
+    //   console.log(existingCard !== null);
+    //   throw new ConflictException('Card with this title already exists');
+    // }
 
     const card = await this.cardRepository.create(createCardDto);
     return card;
