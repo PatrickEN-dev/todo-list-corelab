@@ -1,3 +1,5 @@
+"use client";
+
 import Card from "../Card";
 import { useCard } from "@/hooks/useCard.hook";
 import { TCard } from "@/context/Card/interfaces";
@@ -6,8 +8,11 @@ export default function CardList() {
   const { cards } = useCard();
   const hasCards = cards && cards.length > 0;
 
-  const favoriteCards = cards.filter((card) => card.isFavorite);
-  const otherCards = cards.filter((card) => !card.isFavorite);
+  const favoriteCards = Array.isArray(cards) ? cards.filter((card) => card.isFavorite) : [];
+  const otherCards = Array.isArray(cards) ? cards.filter((card) => !card.isFavorite) : [];
+
+  console.log(favoriteCards);
+  console.log(otherCards);
 
   return (
     <>

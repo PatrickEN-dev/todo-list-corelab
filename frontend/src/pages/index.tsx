@@ -1,5 +1,5 @@
 import CardList from "@/components/Cards/CardList";
-import CardTitle from "@/components/Cards/Title";
+import CardTitle from "@/components/Cards/CardTitle";
 
 export default function Home() {
   return (

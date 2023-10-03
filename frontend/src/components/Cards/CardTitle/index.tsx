@@ -3,6 +3,7 @@
 import { useState, ChangeEvent, KeyboardEvent } from "react";
 import Image from "next/image";
 import StarEmpty from "@/assets/star-empty.svg";
+import StarActivate from "@/assets/star-color.svg";
 import { AiOutlineCheck } from "react-icons/ai";
 import { useCard } from "@/hooks/useCard.hook";
 
@@ -10,6 +11,7 @@ export default function CardTitle() {
   const { addCard, note, title: initialTitle, setNote, colors } = useCard();
   const [title, setTitle] = useState(initialTitle);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleNoteChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNote(e.target.value);
@@ -21,7 +23,7 @@ export default function CardTitle() {
       addCard({
         title,
         note,
-        isFavorite: false,
+        isFavorite,
         colors,
       });
       setNote("");
@@ -33,6 +35,8 @@ export default function CardTitle() {
   const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
 
   const handleTitleBlur = () => setIsEditingTitle(false);
+
+  const handleStarClick = () => setIsFavorite(!isFavorite);
 
   return (
     <div className="flex flex-col items-center max-w-md">
@@ -52,7 +56,13 @@ export default function CardTitle() {
             </h4>
           )}
           <div className="flex justify-around items-center gap-3 outline-none">
-            <Image src={StarEmpty} alt="icon-favoritar" />
+            <button
+              type="button"
+              onClick={handleStarClick}
+              className="border-none outline-none bg-transparent"
+            >
+              <Image src={isFavorite ? StarActivate : StarEmpty} alt="icon-favoritar" />
+            </button>
             <AiOutlineCheck />
           </div>
         </header>
