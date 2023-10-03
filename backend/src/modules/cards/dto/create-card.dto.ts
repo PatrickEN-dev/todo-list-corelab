@@ -1,11 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  IsDateString,
-} from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCardDto {
   @ApiProperty({
@@ -29,6 +23,8 @@ export class CreateCardDto {
     type: Boolean,
     description: 'Indica se o card é favorito',
     example: false,
+    required: false,
+    default: false,
   })
   @IsBoolean()
   isFavorite: boolean;
@@ -37,16 +33,9 @@ export class CreateCardDto {
     type: String,
     description: 'Cor do card',
     example: 'white',
+    default: 'white',
   })
   @IsString()
   @IsOptional()
   color: string;
-
-  @ApiProperty({
-    type: Date,
-    description: 'Data de criação do card',
-    example: '2023-09-23T22:10:00Z',
-  })
-  @IsDateString()
-  readonly createdAt: Date;
 }

@@ -1,13 +1,14 @@
+import { randomUUID } from 'node:crypto';
+
 export class Card {
   readonly id: string;
+  readonly createdAt: Date;
   title: string;
   note: string;
-  isFavorite: boolean;
-  color: string;
-
-  readonly createdAt: Date;
+  isFavorite: boolean | null;
+  color: string | null;
 
   constructor() {
-    this.createdAt = new Date();
+    this.id = randomUUID();
   }
 }

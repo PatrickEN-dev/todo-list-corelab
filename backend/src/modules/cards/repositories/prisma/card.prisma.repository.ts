@@ -14,6 +14,7 @@ export class CardPrismaRepository implements CardRepository {
   async create(data: CreateCardDto): Promise<Card> {
     const card = new Card();
     Object.assign(card, { ...data });
+
     const newCard = await this.prisma.card.create({ data: { ...card } });
 
     return plainToInstance(Card, newCard);

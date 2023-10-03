@@ -11,7 +11,7 @@ model Card {
   id         String   @id
   title      String   @unique
   note       String
-  isFavorite Boolean  @default(false)
+  isFavorite Boolean? @default(false)
   color      String?
   createdAt  DateTime @default(now())
 }
