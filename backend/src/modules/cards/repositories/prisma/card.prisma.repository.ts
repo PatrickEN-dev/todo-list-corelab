@@ -59,9 +59,7 @@ export class CardPrismaRepository implements CardRepository {
 
   async findByTitle(title: string): Promise<Card | null> {
     const card = await this.prisma.card.findFirst({
-      where: {
-        title: { equals: title },
-      },
+      where: { title: { contains: title } },
     });
 
     return card || null;

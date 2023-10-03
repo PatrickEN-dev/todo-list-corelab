@@ -36,12 +36,12 @@ export default function CardTitle() {
 
   return (
     <div className="flex flex-col items-center max-w-md">
-      <div className="w-full bg-white rounded-3xl border border-solid border-gray-300 shadow-md p-4">
+      <div className="w-full bg-white rounded-3xl border border-solid border-gray-300 shadow-md p-4 outline-none">
         <header className="flex w-full justify-between">
           {isEditingTitle ? (
             <input
               type="text"
-              className="font-bold w-full bg-transparent !focus:outline-none"
+              className="font-bold w-full bg-transparent !focus:outline-none outline-none"
               value={title}
               onChange={handleTitleChange}
               onBlur={handleTitleBlur}
@@ -51,14 +51,14 @@ export default function CardTitle() {
               Título
             </h4>
           )}
-          <div className="flex justify-around items-center gap-3">
+          <div className="flex justify-around items-center gap-3 outline-none">
             <Image src={StarEmpty} alt="icon-favoritar" />
             <AiOutlineCheck />
           </div>
         </header>
 
         <textarea
-          className="w-full p-2 border-none resize-none bg-transparent !focus:outline-none"
+          className="w-full p-2 border-none resize-none bg-transparent !focus:outline-none outline-none"
           placeholder="Criar nota..."
           value={note}
           onChange={handleNoteChange}

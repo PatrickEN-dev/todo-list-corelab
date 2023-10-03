@@ -33,8 +33,8 @@ export default function Card({ id, title: initialTitle, note: initialNote }: Car
   };
 
   return (
-    <div className="">
-      <header className="flex w-full justify-between">
+    <div className="h-[200px] bg-blue">
+      <header className="flex w-full justify-between bg-blue">
         {isEditingTitle ? (
           <input
             type="text"
@@ -47,7 +47,12 @@ export default function Card({ id, title: initialTitle, note: initialNote }: Car
             {title}
           </h4>
         )}
-        <Image src={FavoriteIcon} alt="favoritar" />
+        <div className="flex w-[50%] bg-blue">
+          <Image src={FavoriteIcon} alt="favoritar" />
+          <button type="button" onClick={() => deleteCard(id)}>
+            X
+          </button>
+        </div>
       </header>
       {isEditingNote ? (
         <textarea
@@ -84,9 +89,6 @@ export default function Card({ id, title: initialTitle, note: initialNote }: Car
             <Image src={EditColorIcon} alt="editar cor" />
           </button>
         </div>
-        <button type="button" onClick={() => deleteCard(id)}>
-          X
-        </button>
       </div>
     </div>
   );
