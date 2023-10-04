@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { TSelectColorProps } from "./types";
+
+interface SelectColorsProps {
+  selectedColor: string;
+  onColorChange: (color: string) => void;
+}
 
 const colorOptions = [
   "bg-red-500",
@@ -16,13 +20,13 @@ const colorOptions = [
   "bg-orange-500",
 ];
 
-export default function SelectColors({ onSelectColor }: TSelectColorProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function SelectColors({ selectedColor, onColorChange }: SelectColorsProps) {
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleSelectColor = () => setIsOpen(!isOpen);
 
   const handleColorSelect = (color: string) => {
-    onSelectColor(color);
+    onColorChange(color);
     setIsOpen(false);
   };
 
@@ -30,14 +34,14 @@ export default function SelectColors({ onSelectColor }: TSelectColorProps) {
     <div className="relative inline-block">
       <button
         onClick={toggleSelectColor}
-        className="rounded-full w-8 h-8 border-2 border-gray-200 cursor-pointer"
+        className={`rounded-full w-[100px] h-8 border-2 border-gray-200 cursor-pointer ${selectedColor}`}
       ></button>
       {isOpen && (
-        <div className="absolute top-10 left-0 flex space-x-2">
+        <div className="absolute top-10 left-0 flex flex-wrap">
           {colorOptions.map((color, index) => (
             <div
               key={index}
-              className={`w-6 h-6 ${color} rounded-full cursor-pointer`}
+              className={`w-6 h-6 ${color} rounded-full cursor-pointer mb-2 mr-2`}
               onClick={() => handleColorSelect(color)}
             ></div>
           ))}

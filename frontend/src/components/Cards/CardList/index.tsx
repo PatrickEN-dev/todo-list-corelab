@@ -11,13 +11,10 @@ export default function CardList() {
   const favoriteCards = Array.isArray(cards) ? cards.filter((card) => card.isFavorite) : [];
   const otherCards = Array.isArray(cards) ? cards.filter((card) => !card.isFavorite) : [];
 
-  console.log(favoriteCards);
-  console.log(otherCards);
-
   return (
     <>
       {hasCards && (
-        <section className="h-[50vh]">
+        <section>
           <h4>Favoritos</h4>
           <ul>
             {favoriteCards.map((card: TCard) => (
@@ -36,7 +33,7 @@ export default function CardList() {
       )}
 
       {hasCards && (
-        <section className="h-[50vh]">
+        <section>
           <h4>Outros</h4>
           <ul>
             {otherCards.map((card: TCard) => (
