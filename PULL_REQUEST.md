@@ -2,30 +2,38 @@
 
 ## Resumo
 
-Neste pull request, realizei as seguintes ações:
+Neste pull request, foram realizadas as seguintes ações no projeto:
 
-- Criei o projeto frontend utilizando o framework Next.js.
-- Utilizei o framework Nest.js para o desenvolvimento do backend.
-- Escolhi Next.js devido à sua estrutura eficiente, menor consumo de cache e a presença de muitos recursos incorporados.
-- Optei pelo Nest.js por ser baseado em Express, tornando o desenvolvimento mais simples.
-- A utilização de classes no Nest.js facilita a implementação de funcionalidades.
-- Utilizei o banco de dados PostgreSQL para armazenar os dados do aplicativo, aproveitando a integração fornecida pelo Prisma ORM.
-- Dockerizei o projeto para garantir um ambiente de desenvolvimento consistente e fácil de configurar.
-- Optei por um mono-repo para organizar o código-fonte de maneira eficiente e compartilhar recursos comuns.
-- Implementei a estratégia GitFlow para um gerenciamento eficaz de versões e recursos.
+## Front-end
 
-## Detalhes
+- **Framework Escolhido**: Optei por utilizar o framework Next.js no front-end devido à sua eficiência, menor consumo de cache e rica gama de recursos incorporados. Next.js se mostrou a escolha ideal para um projeto full-stack, oferecendo eficiência e facilidade de uso.
 
-Para o desenvolvimento deste projeto, escolhi o Next.js para o frontend devido à sua estrutura avançada, que reduz o consumo de cache e oferece uma ampla gama de recursos incorporados. Acredito que o Next.js seja a escolha ideal para projetos full-stack, pois é um framework que oferece grande eficiência e facilidade de uso.
+## Back-end
 
-Quanto ao backend, optei pelo Nest.js por ser baseado em Express, o que simplifica o desenvolvimento de APIs. Além disso, o Nest.js utiliza classes, o que torna a criação de endpoints e o desenvolvimento de CRUDs muito mais intuitivos, especialmente se você já tem experiência com esses dois frameworks.
+- **Framework Utilizado**: No back-end, escolhi o Nest.js devido à sua base em Express, que simplifica o desenvolvimento de APIs. A utilização de classes no Nest.js facilitou a implementação de funcionalidades.
 
-A escolha do Prisma ORM se deve à sua integração suave com o PostgreSQL, o que facilita a criação de consultas e operações no banco de dados. Além disso, o Prisma oferece uma maneira eficiente e segura de interagir com o banco de dados, tornando o desenvolvimento mais produtivo.
+- **Banco de Dados**: Utilizei o PostgreSQL como banco de dados e aproveitei a integração fornecida pelo Prisma ORM para armazenar e acessar os dados do aplicativo.
 
-Dockerizei o projeto para garantir que todos os desenvolvedores tenham um ambiente de desenvolvimento consistente. Isso evita problemas de configuração e assegura que o aplicativo funcione da mesma forma em diferentes ambientes, desde o desenvolvimento local até a produção.
+- **Dockerização**: O projeto foi dockerizado para garantir um ambiente de desenvolvimento consistente e de fácil configuração, assegurando que o aplicativo funcione de maneira uniforme em diferentes ambientes.
 
-A escolha de um mono-repo permite uma organização mais eficiente do código-fonte. Compartilhar recursos comuns entre o frontend e o backend se torna mais fácil, o que simplifica o desenvolvimento e a manutenção do projeto. Além disso, mesmo que você seja o único desenvolvedor atualmente, a estrutura do mono-repo facilita a integração de desenvolvedores futuros.
+- **Mono-repo**: Optei por um mono-repo para organizar eficientemente o código-fonte, permitindo o compartilhamento de recursos comuns entre o front-end e back-end, simplificando o desenvolvimento e a manutenção.
 
-A estratégia GitFlow foi implementada para gerenciar versões e recursos de maneira eficaz. Mesmo em um ambiente de desenvolvimento solo, o GitFlow simplifica o controle de versões, a implementação de novos recursos e a correção de problemas. É uma prática que ajuda a manter o código organizado e a documentar as mudanças de forma clara.
+- **GitFlow**: Implementei a estratégia GitFlow para gerenciar versões e recursos de forma eficaz, mantendo o código organizado e documentado.
 
-Esta combinação de tecnologias e práticas proporciona um ambiente de desenvolvimento sólido para o projeto, garantindo eficiência tanto no frontend quanto no backend e facilitando a colaboração de desenvolvedores presentes e futuros.
+## Funcionalidade de Favoritar/Desfavoritar
+
+- **Front-end**: Implementei a funcionalidade de favoritar/desfavoritar cards no front-end usando ícones que alternam entre StarEmpty e StarActivated. Isso foi feito para fornecer uma experiência de usuário intuitiva e visualmente clara.
+
+- **Back-end**: No back-end, adicionei lógica para salvar o estado "favorito" de cada card no banco de dados, permitindo que os cards sejam automaticamente classificados nas listas de "Favoritos" e "Outros".
+
+- **Atualização Automática**: Utilizei o hook `useEffect` para acionar uma requisição ao contexto do aplicativo para atualizar automaticamente a lista de cards e sua classificação com base no estado "favorito".
+
+## Outras Funcionalidades Adicionais
+
+- **Barra de Pesquisa Aprimorada**: No back-end, implementei um recurso de pesquisa avançada que permite aos usuários filtrar cards por cor, descrição, título e estado "favorito" usando consultas ORM e serviços.
+
+- **Arquitetura Hexagonal**: O back-end foi desenvolvido seguindo a arquitetura hexagonal, o que facilita a separação de funcionalidades e manutenção de bugs em diferentes branches para uma organização mais eficiente do código.
+
+Este conjunto de tecnologias e práticas proporciona um ambiente de desenvolvimento sólido, garantindo eficiência tanto no front-end quanto no back-end, além de facilitar a colaboração de desenvolvedores presentes e futuros.
+
+🚀
