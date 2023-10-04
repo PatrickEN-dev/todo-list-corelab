@@ -5,16 +5,14 @@ export default function SearchBar() {
         <label
           htmlFor="search-dropdown"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >
-          Your Email
-        </label>
+        ></label>
         <button
           id="dropdown-button"
           data-dropdown-toggle="dropdown"
           className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600"
           type="button"
         >
-          All categories{" "}
+          All categories
           <svg
             className="w-2.5 h-2.5 ml-2.5"
             aria-hidden="true"

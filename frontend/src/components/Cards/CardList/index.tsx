@@ -19,13 +19,7 @@ export default function CardList() {
           <ul>
             {favoriteCards.map((card: TCard) => (
               <li key={card.id}>
-                <Card
-                  title={card.title}
-                  note={card.note}
-                  id={card.id}
-                  isFavorite={true}
-                  colors={card.colors}
-                />
+                <Card toDo={card} />
               </li>
             ))}
           </ul>
@@ -38,13 +32,7 @@ export default function CardList() {
           <ul>
             {otherCards.map((card: TCard) => (
               <li key={card.id}>
-                <Card
-                  title={card.title}
-                  note={card.note}
-                  id={card.id}
-                  isFavorite={false}
-                  colors={card.colors}
-                />
+                <Card toDo={card} />
               </li>
             ))}
           </ul>
