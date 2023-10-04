@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { TCard, TCardCrudContext, TUpdateCard, TcardRequest } from "./interfaces";
+import { TCard, TCardCrudContext, TUpdateCard, TCardRequest } from "./interfaces";
 import { TChildrenProps } from "@/@types/global";
 import { API } from "@/services/API";
 
@@ -9,10 +9,9 @@ export const CardCrudContext = createContext<TCardCrudContext>({} as TCardCrudCo
 
 export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const [cards, setCards] = useState<TCard[]>([]);
-  const [cardData, setCardData] = useState([]);
   const [note, setNote] = useState("");
   const [title, setTitle] = useState("");
-  const [colors, setColors] = useState<string[]>([]);
+  const [colors, setColors] = useState<string>("");
 
   const getCardsRequest = async () => {
     try {
@@ -27,7 +26,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
     getCardsRequest();
   }, []);
 
-  const addCard = async (data: TcardRequest) => {
+  const addCard = async (data: TCardRequest) => {
     try {
       const response = await API.post(`/cards`, data);
       const cardInfo: TCard[] = response.data;

@@ -5,11 +5,11 @@ export interface TCard {
   title: string;
   note: string;
   isFavorite: boolean;
-  colors: string[];
+  colors: string;
 }
 export interface TUpdateCard extends Partial<TCard> {}
 
-export interface TcardRequest extends Omit<TCard, "id"> {}
+export interface TCardRequest extends Omit<TCard, "id"> {}
 
 export interface TCardCrudContext {
   cards: TCard[];
@@ -18,9 +18,9 @@ export interface TCardCrudContext {
   setNote: Dispatch<SetStateAction<string>>;
   title: string;
   setTitle: Dispatch<SetStateAction<string>>;
-  colors: string[];
-  setColors: Dispatch<SetStateAction<string[]>>;
-  addCard: (card: TcardRequest) => void;
+  colors: string;
+  setColors: Dispatch<SetStateAction<string>>;
+  addCard: (card: TCardRequest) => void;
   updateCard: (id: string, updatedCard: TUpdateCard) => void;
   deleteCard: (id: string) => void;
 }

@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import FavoriteIcon from "@/assets/star-empty.svg";
 import StarActivated from "@/assets/star-color.svg";
@@ -17,6 +15,7 @@ export default function Card({
   title: initialTitle,
   note: initialNote,
   isFavorite: initialIsFavorite,
+  colors: initialColor,
 }: CardProps) {
   const { updateCard, deleteCard } = useCard();
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -24,6 +23,8 @@ export default function Card({
   const [title, setTitle] = useState(initialTitle);
   const [note, setNote] = useState(initialNote);
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
+  const [selectedColor, setSelectedColor] = useState(initialColor);
+  const [isOpenSelectColors, setIsOpenSelectColors] = useState(false);
 
   const handleTitleChange = (newTitle: string) => setTitle(newTitle);
 
@@ -32,48 +33,60 @@ export default function Card({
   const toggleFavorite = () => {
     const updatedIsFavorite = !isFavorite;
     setIsFavorite(updatedIsFavorite);
-    updateCard(id, { title, note, isFavorite: updatedIsFavorite });
+    updateCard(id, { title, note, isFavorite: updatedIsFavorite, colors: selectedColor });
   };
 
   const saveTitle = () => {
-    updateCard(id, { title, note, isFavorite });
+    updateCard(id, { title, note, isFavorite, colors: selectedColor });
     setIsEditingTitle(false);
   };
 
   const saveNote = () => {
-    updateCard(id, { title, note, isFavorite });
+    updateCard(id, { title, note, isFavorite, colors: selectedColor });
     setIsEditingNote(false);
   };
 
+  const handleColorSelect = (color: string) => {
+    setSelectedColor(color);
+    updateCard(id, { title, note, isFavorite, colors: color });
+  };
+
+  const toggleSelectColors = () => setIsOpenSelectColors(!isOpenSelectColors);
+
   return (
-    <div className="h-[200px] bg-blue">
-      <header className="flex w-full justify-between bg-blue">
+    <div className={`h-[300px] p-4 bg-${selectedColor} rounded-lg shadow-lg m-2 relative`}>
+      <header className="flex justify-between items-center">
         {isEditingTitle ? (
           <input
             type="text"
             value={title}
             onChange={(e) => handleTitleChange(e.target.value)}
             onBlur={saveTitle}
+            className="w-1/2 text-left"
           />
         ) : (
-          <h4 className="font-bold cursor-pointer" onClick={() => setIsEditingTitle(true)}>
+          <h2
+            className="w-1/2 text-left text-xl font-semibold cursor-pointer"
+            onClick={() => setIsEditingTitle(true)}
+          >
             {title}
-          </h4>
+          </h2>
         )}
-        <div className="flex w-[50%] bg-blue">
+        <div className="flex items-center">
           <Image
             src={isFavorite ? StarActivated : FavoriteIcon}
             alt="favoritar"
             onClick={toggleFavorite}
+            className="cursor-pointer mr-2"
           />
-          <button type="button" onClick={() => deleteCard(id)}>
+          <button type="button" onClick={() => deleteCard(id)} className="text-red-500">
             X
           </button>
         </div>
       </header>
       {isEditingNote ? (
         <textarea
-          className="w-full p-2 border-none resize-none bg-transparent !focus:outline-none"
+          className="w-full h-40 p-2 border-none resize-none bg-transparent !focus:outline-none mt-4 mb-2"
           placeholder="Criar nota..."
           value={note}
           onChange={(e) => handleNoteChange(e.target.value)}
@@ -87,24 +100,17 @@ export default function Card({
           {note}
         </div>
       )}
-      <div className="border-t-2 h-4 flex justify-between px-1">
-        <div>
-          <button type="button" onClick={() => setIsEditingTitle(true)}>
-            <Image src={EditTextIcon} alt="editar text" />
+      <div className="border-t-2 mt-2 flex justify-between items-center absolute bottom-2 left-2 right-2">
+        <div className="flex items-center space-x-2">
+          <button type="button" onClick={() => setIsEditingTitle(true)} className="text-blue-500">
+            <Image src={EditTextIcon} alt="editar texto" className="cursor-pointer" />
           </button>
-
-          <button
-            type="button"
-            onClick={() => (
-              <SelectColors
-                onSelectColor={function (color: string): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
-            )}
-          >
-            <Image src={EditColorIcon} alt="editar cor" />
+          <button type="button" onClick={toggleSelectColors} className="text-blue-500">
+            <Image src={EditColorIcon} alt="editar cor" className="cursor-pointer" />
           </button>
+          {isOpenSelectColors && (
+            <SelectColors selectedColor={selectedColor} onColorChange={handleColorSelect} />
+          )}
         </div>
       </div>
     </div>

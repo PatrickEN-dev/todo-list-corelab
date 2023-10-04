@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, ChangeEvent, KeyboardEvent } from "react";
 import Image from "next/image";
 import StarEmpty from "@/assets/star-empty.svg";
@@ -36,7 +34,16 @@ export default function CardTitle() {
 
   const handleTitleBlur = () => setIsEditingTitle(false);
 
-  const handleStarClick = () => setIsFavorite(!isFavorite);
+  const handleStarClick = () => {
+    setIsFavorite(!isFavorite);
+    addCard({
+      title,
+      note,
+      isFavorite: !isFavorite,
+      colors,
+    });
+    setNote("");
+  };
 
   return (
     <div className="flex flex-col items-center max-w-md">
