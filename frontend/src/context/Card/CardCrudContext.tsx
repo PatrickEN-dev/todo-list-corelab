@@ -28,6 +28,13 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
 
   const addCard = async (data: TCardRequest) => {
     try {
+      if (!data.title && !data.note) {
+        console.error("Erro: O card deve ter pelo menos um título ou uma descrição.");
+        return;
+      }
+      data.colors = data.colors || "white";
+      data.isFavorite = typeof data.isFavorite === "boolean" ? data.isFavorite : false;
+
       const response = await API.post(`/cards`, data);
       const cardInfo: TCard[] = response.data;
       setCards(cardInfo);
