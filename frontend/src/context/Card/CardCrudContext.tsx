@@ -12,6 +12,8 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const [note, setNote] = useState("");
   const [title, setTitle] = useState("");
   const [colors, setColors] = useState<string>("");
+  const [searchCards, setSearchCards] = useState("");
+  const [filterCards, setFilterCards] = useState<TCard[]>([]);
 
   const getCardsRequest = async () => {
     try {
@@ -32,7 +34,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         console.error("Erro: O card deve ter pelo menos um título ou uma descrição.");
         return;
       }
-      data.colors = data.colors || "white";
+
       data.isFavorite = typeof data.isFavorite === "boolean" ? data.isFavorite : false;
 
       const response = await API.post(`/cards`, data);
@@ -68,6 +70,26 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
     }
   };
 
+  const filterCardSearchBar = () => {
+    const recieveCards = [...cards];
+    console.log(recieveCards);
+    const filterNameCards = recieveCards.filter((element) =>
+      element.title.toLowerCase().includes(searchCards.toLowerCase())
+    );
+
+    const filterCategoryCards = recieveCards.filter((element) =>
+      element.note.toLowerCase().includes(searchCards.toLowerCase())
+    );
+
+    const combinedFilter = [...filterNameCards, ...filterCategoryCards];
+
+    if (combinedFilter.length > 0) {
+      setFilterCards(combinedFilter);
+    } else {
+      setFilterCards([]);
+    }
+  };
+
   return (
     <CardCrudContext.Provider
       value={{
@@ -82,6 +104,11 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         setColors,
         deleteCard,
         updateCard,
+        searchCards,
+        setSearchCards,
+        filterCards,
+        setFilterCards,
+        filterCardSearchBar,
       }}
     >
       {children}

@@ -4,43 +4,51 @@ export const colorOptions = [
     textColor: "black",
   },
   {
-    themeColor: "red-500",
-    textColor: "white",
-  },
-  {
-    themeColor: "blue-500",
-    textColor: "white",
-  },
-  {
-    themeColor: "green-500",
-    textColor: "white",
-  },
-  {
-    themeColor: "yellow-500",
+    themeColor: "blue",
     textColor: "black",
   },
   {
-    themeColor: "purple-500",
-    textColor: "white",
-  },
-  {
-    themeColor: "pink-500",
+    themeColor: "green",
     textColor: "black",
   },
   {
-    themeColor: "indigo-500",
-    textColor: "white",
-  },
-  {
-    themeColor: "teal-500",
+    themeColor: "yellow",
     textColor: "black",
   },
   {
-    themeColor: "gray-500",
+    themeColor: "orange",
+    textColor: "black",
+  },
+  {
+    themeColor: "red",
+    textColor: "black",
+  },
+  {
+    themeColor: "lightBlue",
+    textColor: "black",
+  },
+  {
+    themeColor: "purple",
+    textColor: "black",
+  },
+  {
+    themeColor: "lightGreen",
+    textColor: "black",
+  },
+  {
+    themeColor: "lightRed",
+    textColor: "black",
+  },
+  {
+    themeColor: "gray",
     textColor: "white",
   },
   {
-    themeColor: "orange-500",
-    textColor: "black",
+    themeColor: "darkGray",
+    textColor: "white",
+  },
+  {
+    themeColor: "brown",
+    textColor: "white",
   },
 ];

@@ -19,10 +19,15 @@ export default function CardTitle() {
     <div className="flex flex-col items-center max-w-md">
       <form
         onSubmit={handleSubmit(submit)}
-        className="w-full bg-white rounded-3xl border border-solid border-gray-300 shadow-md p-4 "
+        className="w-full bg-white rounded-3xl border border-solid border-gray-300 shadow-md p-4"
       >
         <header className="flex w-full justify-between">
-          <input type="text" className="font-bold w-full bg-transparent" {...register("title")} />
+          <input
+            type="text"
+            placeholder="Título"
+            className="font-bold w-full bg-transparent outline-none border-none"
+            {...register("title")}
+          />
           <div className="flex justify-around items-center gap-3 ">
             <FavoriteButton
               initialValue={false}
@@ -32,7 +37,11 @@ export default function CardTitle() {
           </div>
         </header>
 
-        <textarea placeholder="criar nota..." {...register("note")}></textarea>
+        <textarea
+          placeholder="criar nota..."
+          className="outline-none border-none resize-none w-full"
+          {...register("note")}
+        ></textarea>
       </form>
     </div>
   );
