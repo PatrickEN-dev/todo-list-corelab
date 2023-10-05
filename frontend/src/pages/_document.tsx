@@ -1,3 +1,5 @@
+"use client";
+
 import Header from "@/components/Header";
 import { Html, Head, Main, NextScript } from "next/document";
 
