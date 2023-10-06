@@ -18,6 +18,10 @@ Neste pull request, foram realizadas as seguintes ações no projeto:
 
   3. **Componente Genérico de Favoritar/Desfavoritar**: Um componente genérico que permite aos usuários favoritar e desfavoritar itens de forma fácil e consistente. A componentização dessas funcionalidades simplificou o código, reduziu a duplicação e economizou recursos.
 
+  **Barra de Pesquisa Avançada**: Implementei uma barra de pesquisa avançada que permite aos usuários filtrar cards por cor, descrição, título e estado "favorito" usando consultas ORM e serviços. Quando o usuário digita algo na barra de pesquisa, utilizo o React Hook Form para capturar os dados de pesquisa. Em seguida, faço uma requisição com esses parâmetros por meio de query parameters para criar um novo endereço de URL que renderiza os cards filtrados. Isso proporciona uma experiência de busca eficiente e dinâmica para os usuários.
+
+- **Botão de Voltar**: Adicionei um botão de voltar que permite aos usuários retornar ao endereço anterior após realizar uma pesquisa. Isso melhora a usabilidade do aplicativo, permitindo que os usuários naveguem facilmente entre os resultados da pesquisa e a visualização anterior de cards.
+
   A abordagem de componentização tornou os componentes altamente reutilizáveis e facilitou a manutenção e expansão do projeto. Além disso, ela contribuiu para a redução do número de estados e funções necessárias para manipular os dados e as interações do usuário, resultando em um código mais limpo e eficiente.
 
 ## Back-end
@@ -37,8 +41,6 @@ Neste pull request, foram realizadas as seguintes ações no projeto:
 - **Atualização Automática**: Utilizei o hook `useEffect` para acionar uma requisição ao contexto do aplicativo para atualizar automaticamente a lista de cards e sua classificação com base no estado "favorito".
 
 ## Outras Funcionalidades Adicionais
-
-- **Barra de Pesquisa Aprimorada**: No back-end, implementei um recurso de pesquisa avançada que permite aos usuários filtrar cards por cor, descrição, título e estado "favorito" usando consultas ORM e serviços.
 
 - **Arquitetura Hexagonal**: O back-end foi desenvolvido seguindo a arquitetura hexagonal, o que facilita a separação de funcionalidades e manutenção de bugs em diferentes branches para uma organização mais eficiente do código.
 
