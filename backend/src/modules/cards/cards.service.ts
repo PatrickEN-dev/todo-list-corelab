@@ -12,14 +12,6 @@ export class CardsService {
   constructor(private cardRepository: CardRepository) {}
 
   async create(createCardDto: CreateCardDto) {
-    const existingCard = await this.cardRepository.findByTitle(
-      createCardDto.title,
-    );
-
-    if (!existingCard) {
-      throw new ConflictException('Card with this title already exists');
-    }
-
     const card = await this.cardRepository.create(createCardDto);
     return card;
   }
@@ -69,11 +61,12 @@ export class CardsService {
 
     await this.cardRepository.delete(id);
   }
+
   async searchCards(query: string) {
     const results = await this.cardRepository.searchCards(query);
-    if (!results || results.length === 0) {
-      throw new NotFoundException(`No cards matching query '${query}' found.`);
-    }
+    // if (!results || results.length === 0) {
+    //   throw new NotFoundException(`No cards matching query '${query}' found.`);
+    // }
     return results;
   }
 

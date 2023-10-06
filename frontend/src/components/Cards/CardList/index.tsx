@@ -1,7 +1,7 @@
 "use client";
 
-import Card from "../Card";
 import { useCard } from "@/hooks/useCard.hook";
+import Card from "../Card";
 import { TCard } from "@/context/Card/interfaces";
 
 export default function CardList() {
@@ -16,7 +16,7 @@ export default function CardList() {
       {hasCards && (
         <section>
           <h4>Favoritos</h4>
-          <ul className="md:flex md:flex-row mt-3 md:w-fit-content md:overflow-x-scroll md:scroll-smooth">
+          <ul className="md:flex md:flex-row mt-3 md:w-full md:overflow-scroll">
             {favoriteCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card toDo={card} />
@@ -29,7 +29,7 @@ export default function CardList() {
       {hasCards && (
         <section>
           <h4>Outros</h4>
-          <ul className="md:flex md:flex-row mt-3">
+          <ul className="md:flex md:flex-row mt-3 md:mt-9 md:overflow-scroll">
             {otherCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card toDo={card} />

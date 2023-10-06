@@ -1,6 +1,5 @@
 "use client";
 
-import { AiOutlineCheck } from "react-icons/ai";
 import { useCard } from "@/hooks/useCard.hook";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ICreateFormValues } from "./interface";
