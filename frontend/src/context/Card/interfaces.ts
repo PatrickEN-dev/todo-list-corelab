@@ -17,7 +17,6 @@ export interface TCardCrudContext {
   cards: TCard[];
   setCards: Dispatch<SetStateAction<TCard[]>>;
 
-  getCardsRequest: () => Promise<void>;
   addCard: (card: TCardRequest) => void;
   updateCard: (id: string, updatedCard: TUpdateCard) => void;
   deleteCard: (id: string) => void;
@@ -27,4 +26,5 @@ export interface TCardCrudContext {
   filterCards: TCard[];
   setFilterCards: React.Dispatch<React.SetStateAction<TCard[]>>;
   filterCardSearchBar: () => void;
+  searchCardsByQuery: (searchQuery: string) => Promise<void>;
 }
