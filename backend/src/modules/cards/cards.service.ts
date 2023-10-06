@@ -16,9 +16,7 @@ export class CardsService {
       createCardDto.title,
     );
 
-    // veruificar se o ip que ta no banco é igual ao da pessoa fazendo a req
-
-    if (existingCard !== null) {
+    if (!existingCard) {
       throw new ConflictException('Card with this title already exists');
     }
 
@@ -40,6 +38,7 @@ export class CardsService {
 
   async update(id: string, updateCardDto: UpdateCardDto) {
     const existingCard = await this.cardRepository.findOne(id);
+
     if (!existingCard) {
       throw new NotFoundException(`Card with ID ${id} not found`);
     }
@@ -48,17 +47,18 @@ export class CardsService {
       const existingTitle = await this.cardRepository.findByTitle(
         updateCardDto.title,
       );
-      if (existingTitle && existingCard.id !== id) {
+
+      if (existingTitle && existingTitle.id !== id) {
         throw new ConflictException('Card with this title already exists');
       }
     }
 
-    existingCard.title = updateCardDto.title || existingCard.title;
-    existingCard.note = updateCardDto.note || existingCard.note;
-    existingCard.color = updateCardDto.color || existingCard.color;
+    const updatedCard = await this.cardRepository.update(id, {
+      ...existingCard,
+      ...updateCardDto,
+    });
 
-    await this.cardRepository.update(id, existingCard);
-    return existingCard;
+    return updatedCard;
   }
 
   async remove(id: string) {
