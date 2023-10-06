@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { CreateCardDto } from './dto/create-card.dto';
@@ -25,6 +26,11 @@ export class CardsController {
   @Get()
   async findAll() {
     return await this.cardsService.findAll();
+  }
+
+  @Get('search')
+  async searchCards(@Query('query') query: string) {
+    return await this.cardsService.searchCards(query);
   }
 
   @Get(':id')
