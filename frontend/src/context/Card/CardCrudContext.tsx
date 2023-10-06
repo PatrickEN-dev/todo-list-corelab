@@ -84,26 +84,6 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
     }
   };
 
-  const filterCardSearchBar = () => {
-    const recieveCards = [...cards];
-    console.log(recieveCards);
-    const filterNameCards = recieveCards.filter((element) =>
-      element.title.toLowerCase().includes(searchCards.toLowerCase())
-    );
-
-    const filterCategoryCards = recieveCards.filter((element) =>
-      element.note.toLowerCase().includes(searchCards.toLowerCase())
-    );
-
-    const combinedFilter = [...filterNameCards, ...filterCategoryCards];
-
-    if (combinedFilter.length > 0) {
-      setFilterCards(combinedFilter);
-    } else {
-      setFilterCards([]);
-    }
-  };
-
   return (
     <CardCrudContext.Provider
       value={{
@@ -116,7 +96,6 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         setSearchCards,
         filterCards,
         setFilterCards,
-        filterCardSearchBar,
         searchCardsByQuery,
       }}
     >
