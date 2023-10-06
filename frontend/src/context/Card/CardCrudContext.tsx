@@ -4,42 +4,52 @@ import { createContext, useEffect, useState } from "react";
 import { TCard, TCardCrudContext, TUpdateCard, TCardRequest } from "./interfaces";
 import { TChildrenProps } from "@/@types/global";
 import { API } from "@/services/API";
+import { useSearchParams } from "next/navigation";
 
 export const CardCrudContext = createContext<TCardCrudContext>({} as TCardCrudContext);
 
 export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const [cards, setCards] = useState<TCard[]>([]);
-  const [note, setNote] = useState("");
-  const [title, setTitle] = useState("");
-  const [colors, setColors] = useState<string>("");
   const [searchCards, setSearchCards] = useState("");
   const [filterCards, setFilterCards] = useState<TCard[]>([]);
 
-  const getCardsRequest = async () => {
-    try {
-      const response = await API.get("/cards");
-      setCards(response.data);
-    } catch (error) {
-      console.error("Erro ao buscar os cards:", error);
-    }
-  };
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get("search");
 
   useEffect(() => {
-    getCardsRequest();
-  }, []);
+    const getCardsRequest = async () => {
+      try {
+        if (search) {
+          const response = await API.get(`/cards/search?query=${search}`);
 
-  const addCard = async (data: TCardRequest) => {
+          setCards(response.data);
+          return response.data;
+        } else {
+          const response = await API.get("/cards");
+          setCards(response.data);
+          return response.data;
+        }
+      } catch (error) {
+        console.error("Erro ao buscar resultados da pesquisa:", error);
+        throw error;
+      }
+    };
+    getCardsRequest();
+  }, [search]);
+
+  const addCard = async (formData: TCardRequest) => {
     try {
-      if (!data.title && !data.note) {
+      if (!formData.title && !formData.note) {
         console.error("Erro: O card deve ter pelo menos um título ou uma descrição.");
         return;
       }
 
-      data.isFavorite = typeof data.isFavorite === "boolean" ? data.isFavorite : false;
+      formData.isFavorite = typeof formData.isFavorite === "boolean" ? formData.isFavorite : false;
 
-      const response = await API.post(`/cards`, data);
-      const cardInfo: TCard[] = response.data;
-      setCards(cardInfo);
+      const { data } = await API.post<TCard>(`/cards`, formData);
+
+      setCards((cards) => [...cards, data]);
     } catch (error) {
       console.error("Erro ao criar o card:", error);
     }
@@ -49,11 +59,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
     try {
       await API.patch(`/cards/${id}`, data);
 
-      const updatedCards: TCard[] = cards.map((card) =>
-        card.id === id ? { ...card, ...data } : card
-      );
-
-      setCards(updatedCards);
+      setCards((cards) => cards.map((card) => (card.id === id ? { ...card, ...data } : card)));
     } catch (error) {
       console.error("Erro ao atualizar o card:", error);
     }
@@ -63,10 +69,18 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
     try {
       await API.delete(`/cards/${id}`);
 
-      const deletedContact = cards.filter((card) => card.id !== id);
-      setCards(deletedContact);
+      setCards((cards) => cards.filter((card) => card.id !== id));
     } catch (error) {
       console.error("Erro ao excluir o card:", error);
+    }
+  };
+
+  const searchCardsByQuery = async (searchQuery: string) => {
+    try {
+      const response = await API.get(`/cards/search?query=${searchQuery}`);
+      setFilterCards(response.data);
+    } catch (error) {
+      console.error("Erro ao buscar os cards por consulta:", error);
     }
   };
 
@@ -96,12 +110,6 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         cards,
         setCards,
         addCard,
-        note,
-        setNote,
-        title,
-        setTitle,
-        colors,
-        setColors,
         deleteCard,
         updateCard,
         searchCards,
@@ -109,6 +117,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         filterCards,
         setFilterCards,
         filterCardSearchBar,
+        searchCardsByQuery,
       }}
     >
       {children}
