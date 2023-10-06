@@ -7,7 +7,6 @@ export interface TCard {
   isFavorite: boolean;
   color: string;
 }
-// no meu Modal, a coluna está como color
 
 export interface TUpdateCard extends Partial<TCard> {}
 
@@ -20,11 +19,10 @@ export interface TCardCrudContext {
   addCard: (card: TCardRequest) => void;
   updateCard: (id: string, updatedCard: TUpdateCard) => void;
   deleteCard: (id: string) => void;
+  searchCardsByQuery: (searchQuery: string) => Promise<void>;
 
   searchCards: string;
   setSearchCards: React.Dispatch<React.SetStateAction<string>>;
   filterCards: TCard[];
   setFilterCards: React.Dispatch<React.SetStateAction<TCard[]>>;
-  filterCardSearchBar: () => void;
-  searchCardsByQuery: (searchQuery: string) => Promise<void>;
 }

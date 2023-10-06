@@ -12,11 +12,11 @@ export default function CardList() {
   const otherCards = Array.isArray(cards) ? cards.filter((card) => !card.isFavorite) : [];
 
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col w-full lg:min-w-full">
       {hasCards && (
         <section>
           <h4>Favoritos</h4>
-          <ul className="md:flex md:flex-row mt-3 md:w-full md:overflow-scroll">
+          <ul className="md:flex md:flex-row mt-3 md:w-full md:min-w-fit md:overflow-x-auto">
             {favoriteCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card toDo={card} />
@@ -29,7 +29,7 @@ export default function CardList() {
       {hasCards && (
         <section>
           <h4>Outros</h4>
-          <ul className="md:flex md:flex-row mt-3 md:mt-9 md:overflow-scroll">
+          <ul className="md:flex md:flex-row mt-3 md:mt-9 md:min-w-fit md:overflow-x-auto">
             {otherCards.map((card: TCard) => (
               <li key={card.id}>
                 <Card toDo={card} />

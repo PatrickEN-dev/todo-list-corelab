@@ -10,7 +10,7 @@ export default function Home() {
         <div className="md:max-w-xs md:pb-24 md:ml-14">
           <CardTitle />
         </div>
-        <div className="md:flex md:flex-row md:w-full md:pt-6 max-w-[98%]">
+        <div className="md:flex md:flex-row md:w-full md:pt-6 md:max-w-3xl">
           <CardList />
         </div>
       </main>
