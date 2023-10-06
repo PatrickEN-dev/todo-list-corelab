@@ -9,28 +9,30 @@ const config: Config = {
   ],
   theme: {
     screens: { sm: "375px", md: "768px", lg: "1024px", xl: "1440px" },
-    extend: {
-      backgroundColor: {
-        white: "#ffffff",
-        blue: "#BAE2FF",
-        green: "#B9FFDD",
-        yellow: "#FFE8AC",
-        orange: "#FFCAB9",
-        red: "#F99494",
-        lightBlue: "#9DD6FF",
-        purple: "#ECA1FF",
-        lightGreen: "#DAFF8B",
-        lightRed: "#FFA285",
-        gray: "#CDCDCD",
-        darkGray: "#979797",
-        brown: "#A99A7C",
-      },
-      textColor: {
-        black: "black",
-        white: "white",
-      },
+
+    backgroundColor: {
+      white: "#ffffff",
+      blue: "#BAE2FF",
+      green: "#B9FFDD",
+      yellow: "#FFE8AC",
+      orange: "#FFCAB9",
+      red: "#F99494",
+      lightBlue: "#9DD6FF",
+      purple: "#ECA1FF",
+      lightGreen: "#DAFF8B",
+      lightRed: "#FFA285",
+      gray: "#CDCDCD",
+      darkGray: "#979797",
+      brown: "#A99A7C",
     },
+
+    textColor: {
+      black: "black",
+      white: "white",
+    },
+
+    extend: {},
   },
-  plugins: [require("flowbite/plugin")],
+  plugins: [],
 };
 export default config;

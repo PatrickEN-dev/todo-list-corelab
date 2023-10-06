@@ -1,4 +1,6 @@
-# Descrição do Pull Request
+# Projeto Todo List CoreLab
+
+Este é o repositório do projeto Todo List CoreLab, que inclui tanto o front-end quanto o back-end.
 
 ## Resumo
 
@@ -7,6 +9,16 @@ Neste pull request, foram realizadas as seguintes ações no projeto:
 ## Front-end
 
 - **Framework Escolhido**: Optei por utilizar o framework Next.js no front-end devido à sua eficiência, menor consumo de cache e rica gama de recursos incorporados. Next.js se mostrou a escolha ideal para um projeto full-stack, oferecendo eficiência e facilidade de uso.
+
+- **Componentização para Maior Generalização**: No front-end, foi aplicada uma abordagem de componentização para criar três componentes genéricos:
+
+  1. **Componente de Input Genérico**: Este componente foi projetado para fornecer uma experiência de edição intuitiva, tornando os campos de entrada de dados flexíveis e facilmente personalizáveis assim como feito no site Trello.
+
+  2. **Componente de Textarea Genérico**: Seguindo o mesmo princípio de generalização, foi criado um componente de textarea que utiliza o React Hook Form para melhorar o desempenho e reduzir o número de renderizações de 17 para 1. Isso torna a edição de texto mais eficiente e dinâmica.
+
+  3. **Componente Genérico de Favoritar/Desfavoritar**: Um componente genérico que permite aos usuários favoritar e desfavoritar itens de forma fácil e consistente. A componentização dessas funcionalidades simplificou o código, reduziu a duplicação e economizou recursos.
+
+  A abordagem de componentização tornou os componentes altamente reutilizáveis e facilitou a manutenção e expansão do projeto. Além disso, ela contribuiu para a redução do número de estados e funções necessárias para manipular os dados e as interações do usuário, resultando em um código mais limpo e eficiente.
 
 ## Back-end
 
@@ -19,10 +31,6 @@ Neste pull request, foram realizadas as seguintes ações no projeto:
 - **Mono-repo**: Optei por um mono-repo para organizar eficientemente o código-fonte, permitindo o compartilhamento de recursos comuns entre o front-end e back-end, simplificando o desenvolvimento e a manutenção.
 
 - **GitFlow**: Implementei a estratégia GitFlow para gerenciar versões e recursos de forma eficaz, mantendo o código organizado e documentado.
-
-## Funcionalidade de Favoritar/Desfavoritar
-
-- **Front-end**: Implementei a funcionalidade de favoritar/desfavoritar cards no front-end usando ícones que alternam entre StarEmpty e StarActivated. Isso foi feito para fornecer uma experiência de usuário intuitiva e visualmente clara.
 
 - **Back-end**: No back-end, adicionei lógica para salvar o estado "favorito" de cada card no banco de dados, permitindo que os cards sejam automaticamente classificados nas listas de "Favoritos" e "Outros".
 
