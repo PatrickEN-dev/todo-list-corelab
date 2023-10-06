@@ -14,19 +14,19 @@ import { colorOptions } from "@/components/SelectColors/data";
 export default function Card({ toDo }: TCardProps) {
   const { updateCard, deleteCard } = useCard();
 
-  const colors = colorOptions.find((color) => color.themeColor === toDo.colors);
+  const colors = colorOptions.find((color) => color.themeColor === toDo.color);
 
   const [isOpenSelectColors, setIsOpenSelectColors] = useState(false);
 
   return (
     <div
-      className={`h-[300px] p-4 pt-4 bg-${colors?.themeColor} text-${colors?.textColor} rounded-lg shadow-lg m-2 relative`}
+      className={`h-[300px] p-4 pt-4 bg-${colors?.themeColor} text-${colors?.textColor} rounded-lg shadow-lg m-2 relative min-w-max`}
     >
       <header className="flex justify-between items-center pb-3 font-bold">
         <EditInput
           initialValue={toDo.title}
           onFormSubmit={({ value }) => updateCard(toDo.id, { title: value })}
-          className="border-0 outline-none "
+          className={`border-0 outline-none bg-${colors?.themeColor} text-${colors?.textColor}`}
         />
         <div className="flex items-center gap-2">
           <FavoriteButton
@@ -42,7 +42,7 @@ export default function Card({ toDo }: TCardProps) {
       <EditTextArea
         initialValue={toDo.note}
         onFormSubmit={({ value }) => updateCard(toDo.id, { note: value })}
-        className={`border-0 outline-none w-full h-[170px] resize-none ${colors?.themeColor} text-${colors?.textColor}`}
+        className={`border-0 outline-none w-full h-[170px] resize-none bg-${colors?.themeColor} text-${colors?.textColor}`}
         placeholder={toDo.note ? "" : "criar nota..."}
       />
       <div className="border-t-2 mt-2 flex justify-between items-center absolute bottom-2 left-2 right-2">
@@ -52,8 +52,8 @@ export default function Card({ toDo }: TCardProps) {
           </button>
           {isOpenSelectColors && (
             <SelectColors
-              selectedColor={toDo.colors}
-              onColorChange={(colors) => updateCard(toDo.id, { colors })}
+              selectedColor={toDo.color}
+              onColorChange={(color) => updateCard(toDo.id, { color })}
             />
           )}
         </div>

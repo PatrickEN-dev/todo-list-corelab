@@ -9,9 +9,6 @@ export const CardCrudContext = createContext<TCardCrudContext>({} as TCardCrudCo
 
 export const CardCrudProvider = ({ children }: TChildrenProps) => {
   const [cards, setCards] = useState<TCard[]>([]);
-  const [note, setNote] = useState("");
-  const [title, setTitle] = useState("");
-  const [colors, setColors] = useState<string>("");
   const [searchCards, setSearchCards] = useState("");
   const [filterCards, setFilterCards] = useState<TCard[]>([]);
 
@@ -96,12 +93,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         cards,
         setCards,
         addCard,
-        note,
-        setNote,
-        title,
-        setTitle,
-        colors,
-        setColors,
+
         deleteCard,
         updateCard,
         searchCards,
@@ -109,6 +101,7 @@ export const CardCrudProvider = ({ children }: TChildrenProps) => {
         filterCards,
         setFilterCards,
         filterCardSearchBar,
+        getCardsRequest,
       }}
     >
       {children}

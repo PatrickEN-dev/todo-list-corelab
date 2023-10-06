@@ -12,11 +12,11 @@ export default function CardTitle() {
   const { register, handleSubmit, setValue } = useForm<ICreateFormValues>();
 
   const submit: SubmitHandler<ICreateFormValues> = (formData) => {
-    addCard({ ...formData, colors: "white" });
+    addCard({ ...formData, color: "white" });
   };
 
   return (
-    <div className="flex flex-col items-center max-w-md">
+    <div className="flex flex-col items-center max-w-full mt-3 mx-auto min-w-full md:min-w-[250px] md:h-0">
       <form
         onSubmit={handleSubmit(submit)}
         className="w-full bg-white rounded-3xl border border-solid border-gray-300 shadow-md p-4"
@@ -33,7 +33,6 @@ export default function CardTitle() {
               initialValue={false}
               onFavoriteChange={(isFavorite) => setValue("isFavorite", isFavorite)}
             />
-            <AiOutlineCheck />
           </div>
         </header>
 
